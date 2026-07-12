@@ -361,4 +361,170 @@ if (enteredPassword === correctPassword) {
 
 
 
+// Question 21: Array Methods with for Loop
+// Given numbers = [12, 45, 78, 23, 56, 89, 34]:
 
+// Use a for loop to find the maximum value
+// Use a for loop to calculate the average
+// Create a new array with only numbers greater than 50
+// Reverse the array without using reverse() method
+let numbers = [12, 45, 78, 23, 56, 89, 34];
+let max = numbers[0];
+for (let i = 1; i < numbers.length; i++) {
+  if (numbers[i] > max) {
+    max = numbers[i];
+  }
+}
+console.log("Maximum:", max);
+
+
+let sum1 = 0;
+for (let i = 0; i < numbers.length; i++) {
+  sum1 += numbers[i];
+}
+let average = sum1 / numbers.length;
+console.log("Average:", average);
+
+let greaterThan50 = [];
+for (let i = 0; i < numbers.length; i++) {
+  if (numbers[i] > 50) {
+    greaterThan50.push(numbers[i]);
+  }
+}
+console.log("Greater than 50:", greaterThan50);
+
+
+let reversed = [];
+for (let i = numbers.length - 1; i >= 0; i--) {
+  reversed.push(numbers[i]);
+}
+console.log("Reversed:", reversed);
+
+
+
+// Create a function handleClick that:
+
+// Gets a value from an input field with id "username"
+// Checks if it's empty and shows an alert if so
+// Otherwise, displays "Welcome, [username]!" in a paragraph with id "greeting"
+// Resets the input field after greeting
+function handleClick() {
+
+  let username = document.getElementById("username").value;
+  if (username.trim() === "") {
+    alert("Please enter a username!");
+  } else {
+    document.getElementById("greeting").textContent = "Welcome, " + username + "!";
+    document.getElementById("username").value = "";
+  }
+}
+
+
+
+// Write a function validateForm that:
+
+// Takes email and password as parameters
+// Returns true if email contains "@" and password length ≥ 8
+// Otherwise returns false with specific error messages
+// Test with multiple test cases
+function validateForm(email, password) {
+  let isValid = true;
+  if (!email.includes("@")) {
+    console.log("Error: Email must contain '@' symbol.");
+    isValid = false;
+  }
+  if (password.length < 8) {
+    console.log("Error: Password must be at least 8 characters long.");
+    isValid = false;
+  }
+  if (isValid) {
+    console.log("Form is valid!");
+  }
+
+  return isValid;
+}
+console.log("Test 1:", validateForm("test@example.com", "12345678"));
+console.log("Test 2:", validateForm("testexample.com", "12345678"));
+console.log("Test 3:", validateForm("test@example.com", "123"));
+console.log("Test 4:", validateForm("testexample.com", "123"));
+
+
+
+// Question 24: Temperature Converter
+// Create a function convertTemperature that:
+
+// Takes a temperature and a unit ("C" or "F") as parameters
+// Converts Celsius to Fahrenheit: (C × 9/5) + 32
+// Converts Fahrenheit to Celsius: (F - 32) × 5/9
+// Returns the converted value with 1 decimal place
+function convertTemperature(temp, unit) {
+  let result;
+
+  if (unit === "C") {
+    result = (temp * 9 / 5) + 32;
+  } else if (unit === "F") {
+    result = (temp - 32) * 5 / 9;
+  } else {
+    return "Error: Invalid unit. Use 'C' or 'F'.";
+  }
+
+  return result.toFixed(1);
+}
+console.log(convertTemperature(0, "C"));    // freezing point
+console.log(convertTemperature(100, "C"));  // boiling point
+console.log(convertTemperature(98.6, "F")); // body temp
+console.log(convertTemperature(32, "F"));   // freezing point
+console.log(convertTemperature(25, "X"));   // invalid unit
+
+
+
+// Question 25: Shopping Cart Array Operations
+// Create an array cart = [] and write these functions:
+
+// addItem(name, price): Adds item object to cart
+// removeItem(name): Removes item by name
+// calculateTotal(): Returns sum of all item prices
+// applyDiscount(percent): Applies discount to total
+// listItems(): Returns array of just item names
+let cart = [];
+function addItem(name, price) {
+  cart.push({ name: name, price: price });
+  console.log(name + " added to cart.");
+}
+function removeItem(name) {
+  let index = cart.findIndex(item => item.name === name);
+
+  if (index !== -1) {
+    cart.splice(index, 1);
+    console.log(name + " removed from cart.");
+  } else {
+    console.log(name + " not found in cart.");
+  }
+}
+function calculateTotal() {
+  let total = 0;
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].price;
+  }
+  return total;
+}
+function applyDiscount(percent) {
+  let total = calculateTotal();
+  let discountedTotal = total - (total * percent / 100);
+  return discountedTotal.toFixed(2);
+}
+function listItems() {
+  return cart.map(item => item.name);
+}
+addItem("Laptop", 999.99);
+addItem("Mouse", 25.50);
+addItem("Keyboard", 45.00);
+
+console.log("Cart items:", listItems());
+console.log("Total:", calculateTotal());
+
+removeItem("Mouse");
+console.log("Cart items after removal:", listItems());
+console.log("Total after removal:", calculateTotal());
+
+console.log("Total after 10% discount:", applyDiscount(10));
